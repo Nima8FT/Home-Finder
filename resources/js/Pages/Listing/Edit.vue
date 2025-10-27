@@ -10,73 +10,73 @@ defineProps({
 
 <template>
     <Form :action="route('listing.update',listing.id)" method="put" #default="errors">
-        <div>
-            <div>
-                <label>Beds</label>
-                <input name="beds" type="number" :value=listing.beds />
+        <div class="grid grid-cols-6 gap-4">
+            <div class="col-span-2">
+                <label class="label">Beds</label>
+                <input name="beds" type="number" :value=listing.beds class="input"/>
                 <div v-if="errors.beds">
                     {{ errors.beds }}
                 </div>
             </div>
 
-            <div>
-                <label>Baths</label>
-                <input name="baths" type="number" :value=listing.baths />
-                <div v-if="errors.baths">
+            <div class="col-span-2">
+                <label class="label">Baths</label>
+                <input name="baths" type="number" :value=listing.baths  class="input"/>
+                <div v-if="errors.baths" class="input-error">
                     {{ errors.baths }}
                 </div>
             </div>
 
-            <div>
-                <label>Area</label>
-                <input name="area" type="number" :value=listing.area />
-                <div v-if="errors.area">
+            <div class="col-span-2">
+                <label class="label">Area</label>
+                <input name="area" type="number" :value=listing.area class="input"/>
+                <div v-if="errors.area" class="input-error">
                     {{ errors.area }}
                 </div>
             </div>
 
-            <div>
-                <label>City</label>
-                <input name="city" type="text" :value=listing.city />
-                <div v-if="errors.city">
+            <div class="col-span-4">
+                <label class="label">City</label>
+                <input name="city" type="text" :value=listing.city class="input"/>
+                <div v-if="errors.city" class="input-error">
                     {{ errors.city }}
                 </div>
             </div>
 
-            <div>
-                <label>Post Code</label>
-                <input name="code" type="number" :value=listing.code />
-                <div v-if="errors.code">
+            <div class="col-span-2">
+                <label class="label">Post Code</label>
+                <input name="code" type="number" :value=listing.code class="input"/>
+                <div v-if="errors.code" class="input-error">
                     {{ errors.code }}
                 </div>
             </div>
 
-            <div>
-                <label>Street</label>
-                <input name="street" type="text" :value=listing.street />
-                <div v-if="errors.street">
+            <div class="col-span-4">
+                <label class="label">Street</label>
+                <input name="street" type="text" :value=listing.street class="input"/>
+                <div v-if="errors.street" class="input-error">
                     {{ errors.street }}
                 </div>
             </div>
 
-            <div>
-                <label>Street Nr</label>
-                <input name="street_nr" type="number" :value=listing.street_nr />
-                <div v-if="errors.street_nr">
+            <div class="col-span-2">
+                <label class="label">Street Nr</label>
+                <input name="street_nr" type="number" :value=listing.street_nr class="input"/>
+                <div v-if="errors.street_nr" class="input-error">
                     {{ errors.street_nr }}
                 </div>
             </div>
 
-            <div>
-                <label>Price</label>
-                <input name="price" type="number" :value=listing.price />
-                <div v-if="errors.price">
+            <div class="col-span-6">
+                <label class="label">Price</label>
+                <input name="price" type="number" :value=listing.price class="input"/>
+                <div v-if="errors.price" class="input-error">
                     {{ errors.price }}
                 </div>
             </div>
 
             <div>
-                <button type="submit">Edit</button>
+                <button type="submit" class="btn-primary">Edit</button>
             </div>
         </div>
     </Form>
