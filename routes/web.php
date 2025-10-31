@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('listing', ListingController::class)->except('index','show')->middleware('auth');
 Route::resource('listing', ListingController::class)->only('index','show');
+Route::post('listing/filter', [ListingController::class, 'filter'])->name('listing.filter');
 
 //login route
 Route::get('login',[AuthController::class,'loginForm'])->name('login.form');

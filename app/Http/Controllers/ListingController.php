@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ListingFilterRequest;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
 use App\Models\Listing;
@@ -10,16 +11,19 @@ use Illuminate\Support\Facades\Auth;
 class ListingController extends Controller
 {
     public $user;
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->user = Auth::user();
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return inertia('Listing/Index', [
-            'listings' => Listing::all(),
+            'listings' => Listing::latest()->paginate(9)
         ]);
     }
 
@@ -78,5 +82,37 @@ class ListingController extends Controller
     {
         $listing->delete();
         return redirect()->back()->with('success', 'Listing deleted.');
+    }
+
+    public function filter(ListingFilterRequest $request)
+    {
+        $data = $request->validated();
+        $query = Listing::query();
+
+        if (!empty($data['price-from'])) {
+            $query->where('price', '>=', $data['price-from']);
+        }
+        if(!empty($data['price-to'])){
+            $query->where('price', '<=', $data['price-to']);
+        }
+
+        if(!empty($data['area-from'])) {
+            $query->where('area', '>=', $data['area-from']);
+        }
+        if(!empty($data['area-to'])) {
+            $query->where('area', '<=', $data['area-to']);
+        }
+
+        if(!empty($data['beds'])) {
+            $query->where('beds', '=', $data['beds']);
+        }
+        if(!empty($data['baths'])) {
+            $query->where('baths', '=', $data['baths']);
+        }
+
+        $filter = $query->latest()->paginate(9)->withQueryString();
+        return inertia('Listing/Index', [
+            'listings' => $filter
+        ]);
     }
 }
