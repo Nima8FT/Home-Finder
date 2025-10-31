@@ -9,7 +9,7 @@ import {useMonthlyPayment} from "../../../Composable/useMonthlyPayment.js";
 
 const props = defineProps({listing: Object})
 
-    const {monthlyPayment} = useMonthlyPayment(props.listing.price, 2.5, 25)
+const {monthlyPayment} = useMonthlyPayment(props.listing.price, 2.5, 25)
 </script>
 
 <template>
@@ -27,11 +27,9 @@ const props = defineProps({listing: Object})
                 <ListingAddress :listing="props.listing" class="text-gray-500 text-sm"/>
             </Link>
         </div>
-        <div>
-            <Link :href="route('listing.edit',props.listing.id)">Edit</Link>
-        </div>
-        <div>
-            <Link :href="route('listing.destroy',props.listing.id)" method="delete" as="button">Delete</Link>
+        <div class="mt-2 flex justify-between">
+            <Link :href="route('listing.edit',props.listing.id)" class="btn-normal bg-indigo-700">Edit</Link>
+            <Link :href="route('listing.destroy',props.listing.id)" method="delete" as="button" class="cursor-pointer btn-normal bg-red-800">Delete</Link>
         </div>
     </Box>
 </template>

@@ -20,9 +20,9 @@ const user = computed(() => page.props.user)
                     <Link :href="route('listing.index')">Home Finder</Link>
                 </div>
                 <div v-if="user" class="flex items-center gap-4">
-                    <div class="text-sm text-gray-400">
+                    <Link :href="route('realtor.listing.index')" class="text-sm text-gray-400">
                         {{user['name']}}
-                    </div>
+                    </Link>
                     <Link :href="route('listing.create')"
                           class="btn-primary">
                         + New Listing
